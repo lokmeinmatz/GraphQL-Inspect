@@ -1,0 +1,33 @@
+{
+  "name": "graphql-inspect",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "tsc --noEmit src/index.ts",
+    "dev": "vite",
+    "build:firefox": "tsx build.ts firefox",
+    "start:firefox": "web-ext run --source-dir ./dist/firefox"
+  },
+  "author": "lokmeinmatz <matze.kind@web.de>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/firefox-webext-browser": "^94.0.1",
+    "@types/har-format": "^1.2.8",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "del": "^7.0.0",
+    "esbuild": "^0.15.0",
+    "tsx": "^3.8.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.5",
+    "web-ext": "^7.1.1",
+    "webextension-polyfill": "^0.9.0"
+  },
+  "dependencies": {
+    "graphql": "^16.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
