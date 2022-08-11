@@ -1,0 +1,19 @@
+.panel-bar {
+    background-color: #222;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: min-content auto min-content;
+    width: 100%;
+
+    & > .settings-btn {
+        grid-column: 3 / 4;
+    }
+}
+
+.settings {
+    & .clear-on-nav {
+        & > label {
+            white-space: nowrap;
+        }
+    }
+}

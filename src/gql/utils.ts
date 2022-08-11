@@ -88,6 +88,8 @@ export async function parseEntry(entry: NetRequest): Promise<GQLRequest[]> {
       responseBody: Array.isArray(responseBody) ? responseBody[i] : responseBody,
       url: entry.request.url,
       response: entry.response,
+      time: entry.time,
+      timings: entry.timings,
       ...parsedQuery
     };
   })
