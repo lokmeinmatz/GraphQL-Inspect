@@ -27,18 +27,9 @@ async function main() {
 
 
     await vite.build()
-    /*
-    await esbuild.build({
-        entryPoints: {
-            'background': 'src/background.ts'
-        },
-        bundle: true,
-        outdir: distPath
-    })
-    */
+
     await Promise.all([
         fs.copyFile(`manifest.${target}.json`, path.join(distPath, 'manifest.json')),
-        fs.copyFile(`panel.html`, path.join(distPath, 'panel.html')),
         fs.cp('icons', path.join(distPath, 'icons'), { recursive: true })
     ])
     

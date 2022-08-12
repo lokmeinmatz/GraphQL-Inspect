@@ -1,1 +1,8 @@
 @import 'antd/dist/antd.dark.css';
+
+
+.query-list {
+    & .selected {
+        background-color: #444;
+    }
+}

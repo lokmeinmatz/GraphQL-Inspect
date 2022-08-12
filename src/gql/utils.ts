@@ -85,11 +85,12 @@ export async function parseEntry(entry: NetRequest): Promise<GQLRequest[]> {
 
   return parsedQueries.map((parsedQuery, i) => {
     return {
-      responseBody: Array.isArray(responseBody) ? responseBody[i] : responseBody,
+      responseBody: JSON.parse(Array.isArray(responseBody) ? responseBody[i] : responseBody),
       url: entry.request.url,
       response: entry.response,
       time: entry.time,
       timings: entry.timings,
+      startedDateTime: new Date(entry.startedDateTime),
       ...parsedQuery
     };
   })
@@ -165,7 +166,7 @@ export interface ParsedQuery {
   fragments: any[],
   id: string,
   bareQuery: string,
-  data: { name: string, kind: Kind, operations: any }[],
+  data: { name: string, kind: Kind | string, operations: any }[],
   rawParse: string
 }
 
