@@ -4,7 +4,7 @@
     "description": "Inspect GraphQL requests and response data",
     "version": "0.1.0",
     "icons": {
-      "64": "icons/icon.png"
+      "128": "icons/icon.png"
     },
     "author": "Matthias Kind",
     "homepage_url": "https://github.com/lokmeinmatz/GraphQL-Inspect",

@@ -5,7 +5,7 @@ import cls from 'classnames';
 import './QueryDetails.scss'
 import { useWindowSize } from "react-use";
 import { JSONTree } from "react-json-tree";
-import * as monaco from "monaco-editor";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import Editor, { loader } from "@monaco-editor/react";
 import { findOperation, fmtTime, getSizeStr } from "../util";
 import { useMemo } from "react";
