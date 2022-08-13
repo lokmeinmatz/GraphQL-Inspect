@@ -7,7 +7,7 @@
     "check": "tsc --noEmit src/index.ts",
     "dev": "vite",
     "build:firefox": "tsx build.ts firefox",
-    "bundle:firefox": "web-ext build --source-dir ./dist/firefox",
+    "bundle:firefox": "web-ext build --source-dir ./dist/firefox --overwrite-dest",
     "start:firefox": "web-ext run --source-dir ./dist/firefox"
   },
   "author": "lokmeinmatz <matze.kind@web.de>",

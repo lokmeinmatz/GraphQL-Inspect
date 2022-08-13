@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "graphql-inspect",
+    "name": "GraphQL-Inspect",
     "description": "Inspect GraphQL requests and response data",
     "version": "0.1.0",
     "icons": {
@@ -11,5 +11,10 @@
     "devtools_page": "devtools.html",
     "permissions": [
       "storage"
-    ]
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "graphql-inspect@lokmeinmatz"
+      }
+    }
   }
