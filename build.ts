@@ -26,7 +26,12 @@ async function main() {
     deleteSync(distPath)
 
 
-    await vite.build()
+
+
+    await Promise.all([
+        vite.build({ configFile: 'vite.config.ts', clearScreen: false }),
+        vite.build({ configFile: 'vite.devtools.config.ts', clearScreen: false })
+    ])
 
     await Promise.all([
         fs.copyFile(`manifest.${target}.json`, path.join(distPath, 'manifest.json')),

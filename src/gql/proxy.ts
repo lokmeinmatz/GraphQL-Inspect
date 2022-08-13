@@ -13,14 +13,25 @@ import browser from 'webextension-polyfill'
   
   
       browser.runtime.onMessage.addListener((msg: ExtMessage) => {
-        if (msg.type === 'requestsAdded' && msg.tabId === browser.devtools.inspectedWindow.tabId) {
-          if (msg.startIndex === this.requests.length) {
-              this.requests.push(...msg.data)
-              this.emitRequestAdded(msg.startIndex)
-          } else {
-            console.warn('start Indices dont match, request new data!')
-          }
+        if (msg.tabId !== browser.devtools.inspectedWindow.tabId) { return; }
+        console.log('proxy received message', msg)
+        switch (msg.type) {
+          case 'requestsAdded':
+            if (msg.startIndex === this.requests.length) {
+                this.requests.push(...msg.data)
+                this.emitRequestAdded(msg.startIndex)
+            } else {
+              console.warn('start Indices dont match, request new data!')
+            }
+            break;
+          case 'updateAll':
+            this.requests = msg.data
+            this.events.emit('updateAll', { data: msg.data })
+          default:
+            console.warn('unhandled message type ' + msg.type)
+            break;
         }
+
       })
     }
 

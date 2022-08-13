@@ -10,7 +10,7 @@ export interface GQLRequest extends ParsedQuery {
   response: Response,
   timings: Timings,
   time: number,
-  startedDateTime: Date
+  startedDateTime: string
 }
 
 

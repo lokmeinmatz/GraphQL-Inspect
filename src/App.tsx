@@ -24,7 +24,7 @@ export default (props: { gqlStore: GraphQLRequestStore }) => {
 
     return (
         <main>
-            <PanelBar />
+            <PanelBar onClear={() => props.gqlStore.clearAll()} />
             <QueryList queries={queries} onSelect={setSelectedQuery} selectedQuery={selectedQuery} />
             {
                 selectedQuery && <QueryDetails query={selectedQuery} onClose={() => setSelectedQuery(undefined)} />

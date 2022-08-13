@@ -1,10 +1,11 @@
 import { Table } from "antd"
 import { ColumnsType } from "antd/lib/table"
+import { Kind } from "graphql"
 import { GQLRequest } from "../gql"
+import { findOperation, fmtTime, getSizeStr } from "../util"
+import './QueryList.scss'
 
 
-
-const fmtTime = (time: Date) => `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}:${time.getSeconds().toString().padStart(2, '0')}:${time.getMilliseconds().toString().padStart(3, '0')}`
 
 export const QueryList = (props: {
     queries: GQLRequest[],
@@ -12,10 +13,14 @@ export const QueryList = (props: {
     selectedQuery?: GQLRequest
 }) => {
     
-    const cols: ColumnsType<GQLRequest> = [
+    const cols: ColumnsType<object> = [
         {
             title: 'Query Name',
-            dataIndex: ['data', 0, 'name']
+            dataIndex: ['data'],
+            render: (data: GQLRequest['data']) => {
+                const op = findOperation(data)
+                return `${op?.operations[0].type} ${op?.name}`
+            }
         },
         {
             title: 'Endpoint',
@@ -23,7 +28,13 @@ export const QueryList = (props: {
         },
         {
             title: 'Time',
-            render: (entry: GQLRequest) => (<p>{fmtTime(entry.startedDateTime)}</p>)
+            width: 100,
+            render: (entry: GQLRequest) => (fmtTime(new Date(entry.startedDateTime)))
+        },
+        {
+            title: 'Sizes (kB)',
+            width: 90,
+            render: (entry: GQLRequest) => (<span className="response-size">{getSizeStr(entry.response)}</span>)
         }
     ]
 
@@ -32,7 +43,10 @@ export const QueryList = (props: {
             dataSource={props.queries}
             columns={cols}
             rowKey="id"
-            onRow={(record, idx) => {
+            pagination={false}
+            sticky={true}
+            scroll={{ y: '100%'}}
+            onRow={(record: any, idx) => {
                 console.log(record.id, props.selectedQuery?.id)
                 return {
                     onClick: () => props.onSelect(record),

@@ -2,10 +2,14 @@ import { Button, Dropdown, Menu, Switch } from 'antd'
 import { DeleteFilled, SettingFilled } from '@ant-design/icons'
 import { useState } from 'react'
 import './PanelBar.scss'
+import { useAppState } from '../util'
 
 const Settings = () => {
 
-    const [clearOnNav, setClearOnNav] = useState(false)
+    const {
+        clearOnNav,
+        setClearOnNav
+    } = useAppState()
 
     return <Menu className='settings'
         items={[
@@ -23,15 +27,13 @@ const Settings = () => {
     />
 }
 
-export const PanelBar = () => {
+export const PanelBar = (props: { onClear: () => void }) => {
     
     return <div className="panel-bar">
-        <Button>
-            <DeleteFilled />
+        <Button onClick={props.onClear} icon={<DeleteFilled />}>
         </Button>
         <Dropdown className='settings-btn' overlay={<Settings />} trigger={['click']}>
-            <Button>
-                <SettingFilled />
+            <Button icon={<SettingFilled />}>
             </Button>
         </Dropdown>
     </div>

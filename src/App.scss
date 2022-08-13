@@ -1,8 +1,7 @@
 @import 'antd/dist/antd.dark.css';
 
-
-.query-list {
-    & .selected {
-        background-color: #444;
-    }
+#root > main {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: max-content auto;
 }

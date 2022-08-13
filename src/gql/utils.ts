@@ -90,7 +90,7 @@ export async function parseEntry(entry: NetRequest): Promise<GQLRequest[]> {
       response: entry.response,
       time: entry.time,
       timings: entry.timings,
-      startedDateTime: new Date(entry.startedDateTime),
+      startedDateTime: entry.startedDateTime,
       ...parsedQuery
     };
   })

@@ -19,9 +19,13 @@ async function run() {
     // @ts-ignore
     window.gql = gql
     // @ts-ignore
-    window.fakeReq = () => {
-        gql.requests.push(fakeReq1, fakeReq2)
-        gql.emitRequestAdded(gql.requests.length - 2)
+    window.loadFake = async () => {
+        const HAR = await fetch('/test1.har').then(r => r.json())
+        for (const entry of HAR.log.entries) {
+            entry.getContent = () => Promise.resolve(entry.response.content?.text)
+            await gql.parseNetworkRequest(entry)
+        }
+        console.log('added fake data from public/test1.har')
     }
 
     createRoot(document.getElementById('root')!).render(

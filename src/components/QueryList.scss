@@ -1,0 +1,35 @@
+
+
+.query-list {
+    height: 100%;
+    min-height: 0;
+    & > .ant-table-wrapper {
+        height: 100%;
+        & > .ant-spin-nested-loading {
+            height: 100%;
+            & > .ant-spin-container {
+                height: 100%;
+                & > .ant-table {
+                    height: 100%;
+                    & > .ant-table-container {
+                        height: 100%;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+    & .selected {
+        background-color: #444;
+    }
+    & .ant-table-cell {
+        padding: 4px 8px;
+
+        & .response-size {
+            display: block;
+            width: 100%;
+            text-align: end;
+        }
+    }
+}
