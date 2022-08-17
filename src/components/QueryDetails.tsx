@@ -4,14 +4,14 @@ import { GQLRequest } from "../gql";
 import cls from 'classnames';
 import './QueryDetails.scss'
 import { useWindowSize } from "react-use";
-import { JSONTree } from "react-json-tree";
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import Editor, { loader } from "@monaco-editor/react";
+import ReactJson from 'react-json-view';
 import { findOperation, fmtTime, getSizeStr } from "../util";
-import { useMemo } from "react";
-
-loader.config({ monaco });
-
+import { useMemo } from "react"
+import {UnControlled as CodeMirror} from 'react-codemirror2'
+import { EditorConfiguration } from 'codemirror'
+import 'codemirror-graphql/mode';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/twilight.css';
 
 export const QueryDetails = (props: { query: GQLRequest, onClose: () => void }) => {
 
@@ -31,10 +31,16 @@ export const QueryDetails = (props: { query: GQLRequest, onClose: () => void }) 
         <span>Size: {getSizeStr(props.query.response)}</span>
     ]
 
+    const queryConf: EditorConfiguration = {
+        readOnly: true,
+        mode: 'graphql',
+        theme: 'twilight'
+    }
+
     return <aside className={cls('query-details', { vertical: !onBottom, horizontal: onBottom })}>
         <div className="query-details__controls">
             <h1>{ title }</h1>
-            <Button onClick={props.onClose} icon={<CloseOutlined />}>
+            <Button onClick={props.onClose} icon={<CloseOutlined />} style={{ backgroundColor: '#111' }}>
             </Button>
         </div>
         <div className="query-details__main">
@@ -50,23 +56,21 @@ export const QueryDetails = (props: { query: GQLRequest, onClose: () => void }) 
                 <Collapse.Panel header='Request' key='req'>
                     <Collapse>
                         <Collapse.Panel header='Query' key='query' className='query-panel'>
-                            <Editor
-                                height="80vh"
+                            <CodeMirror
                                 value={props.query.bareQuery}
-                                language='graphql'
-                                theme="vs-dark"
-                                options={{
-                                    readOnly: true
-                                }}
+                                options={queryConf}
                             />
                         </Collapse.Panel>
                         <Collapse.Panel header='Variables' key='variables'>
-                            <JSONTree data={props.query.queryVariables} shouldExpandNode={(_k, _d, level) => level < 3} />
+                            <ReactJson src={props.query.queryVariables} theme="twilight" />
                         </Collapse.Panel>
                     </Collapse>
                 </Collapse.Panel>
                 <Collapse.Panel header='Response' key='res'>
-                    <JSONTree data={props.query.responseBody} shouldExpandNode={(_k, _d, level) => level < 3} />
+                    <ReactJson src={props.query.responseBody} theme="twilight" shouldCollapse={arg => {
+                        if (arg.type === 'array') return (arg.src as any[]).length > 5;
+                        return Object.keys(arg.src).length > 10;
+                    }} />
                 </Collapse.Panel>
             </Collapse>
         </div>
