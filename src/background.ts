@@ -24,7 +24,7 @@ async function run() {
         })
 
         browser.devtools.network.onNavigated.addListener(async url => {
-            const clear = await browser.storage.local.get(CLEAR_ON_NAV_KEY).then(d => d[CLEAR_ON_NAV_KEY])
+            const clear = await browser.storage.local.get(CLEAR_ON_NAV_KEY).then(d => d[CLEAR_ON_NAV_KEY] ?? true)
 
             console.log('navigated. clearAll: ' + clear)
             if (clear) {

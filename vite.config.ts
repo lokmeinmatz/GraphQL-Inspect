@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
-import path from 'node:path'
 import react from '@vitejs/plugin-react'
-import monacoEditorPlugin from 'vite-plugin-monaco-editor';
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,15 +12,8 @@ export default defineConfig({
     },
     plugins: [
         react(),
-        monacoEditorPlugin({
-            forceBuildCDN: true,
-            languageWorkers: ['json', 'editorWorkerService'],
-            customWorkers: [
-              {
-                label: 'graphql',
-                entry: 'monaco-graphql/dist/graphql.worker',
-              },
-            ],
-          }),
-    ],
+        visualizer({
+          template: 'network'
+        })
+    ]
 })
