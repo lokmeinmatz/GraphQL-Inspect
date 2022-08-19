@@ -29,3 +29,5 @@ run `fakeReq()` in console to populate table with fake reqs captured (see fakes.
 `npm run start:firefox`, open devtools, open GraphQL-Inspect tab and go to page that uses GraphQL
 
 or sideload the dist/firefox folder in Edge or Chrome
+
+`npm run bundle:firefox` 

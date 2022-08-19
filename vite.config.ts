@@ -6,9 +6,9 @@ import { visualizer } from 'rollup-plugin-visualizer'
 export default defineConfig({
     build: {
         outDir: 'dist/firefox',
-        sourcemap: 'inline',
+        sourcemap: false,
         emptyOutDir: false,
-        minify: false,
+        minify: true,
     },
     plugins: [
         react(),
