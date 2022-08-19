@@ -4,7 +4,10 @@ import { fakeReq1, fakeReq2 } from './fakes'
 import { GraphQLRequestStore } from './gql/index'
 import { isInWebExt } from './util'
 
-
+// POLYFILL
+if (typeof (window as any).global === 'undefined') {
+    (window as any).global = window;
+}
 
 
 async function run() {
