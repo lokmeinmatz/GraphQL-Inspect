@@ -3,6 +3,9 @@
   "version": "0.1.2",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "url": "https://github.com/lokmeinmatz/GraphQL-Inspect"
+  },
   "scripts": {
     "check": "tsc --noEmit src/index.ts",
     "dev": "vite",

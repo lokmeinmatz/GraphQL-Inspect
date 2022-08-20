@@ -2,6 +2,8 @@
 
 © Matthias Kind 2022
 
+On github: https://github.com/lokmeinmatz/GraphQL-Inspect
+
 Network request parser from https://github.com/Ghirro/graphql-network 
 
 ## Usage
